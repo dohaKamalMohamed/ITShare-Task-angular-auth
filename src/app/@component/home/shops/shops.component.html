@@ -1,0 +1,27 @@
+<button mat-flat-button color="primary" *ngIf="isAdmin" (click)="openDialog()">Add shop</button>
+
+<div class="card">
+<mat-card class="example-card" *ngFor="let shop of shops">
+    <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{shop.title}}</mat-card-title>
+        <mat-card-subtitle>{{shop.subTitle}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="shop.imgURL" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+        <p>
+            {{shop.contnent}}
+        </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button *ngIf="shop.Inforole.length==0 && !isAdmin" (click)="ADDlike(shop._id,'subscribed')">LIKE</button>
+        <button mat-button *ngIf="shop.Inforole.length>0&&shop.Inforole[0].shopRole=='NoRelation'&& !isAdmin" (click)="Updatelike(shop.Inforole[0]._id,'subscribed')">LIKE</button>
+        <button mat-button *ngIf="shop.Inforole.length>0&&shop.Inforole[0].shopRole=='subscribed'&& !isAdmin" (click)="Updatelike(shop.Inforole[0]._id,'NoRelation')">UNLIKE</button>
+        <!-- <button mat-button *ngIf="shop.Inforole.length>0&&shop.Inforole[0].shopRole=='subscribed'&& !isAdmin" (click)="UpdateAdmin(shop.Inforole[0]._id,'admin')">adminREQUEST</button> -->
+        <!-- <button mat-button *ngIf="shop.Inforole.length>0&&shop.Inforole[0].shopRole=='admin' || isAdmin" (click)="openModal()">EDIT</button> -->
+        <button mat-button *ngIf="shop.Inforole.length>0&&shop.Inforole[0].shopRole=='admin'|| isAdmin" (click)="delete(shop._id)">DELETE</button>
+        <!-- <button mat-button *ngIf="shop.Inforole.length>0&&shop.Inforole[0].shopRole=='admin'|| isAdmin" (click)="Updateadmin(shop.Inforole[0]._id,'NoRelation')">noAdmin</button> -->
+    </mat-card-actions>
+</mat-card>
+
+</div>
